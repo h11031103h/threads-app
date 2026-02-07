@@ -1,66 +1,46 @@
-import Image from "next/image";
 import styles from "./page.module.css";
+import LoginButton from "@/components/LoginButton";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className={styles.main}>
+      <div className={styles.hero}>
+        <h1 className={styles.title}>Threads Manager</h1>
+        <p className={styles.subtitle}>
+          Create, Schedule, and Analyze your Threads presence with premium tools.
+        </p>
+        <LoginButton />
+      </div>
+
+      <div className={styles.grid}>
+        <div className={`${styles.card} glass`}>
+          <h2>
+            Calendar <span>📅</span>
+          </h2>
+          <p>Manage your content schedule with a drag-and-drop calendar interface.</p>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className={`${styles.card} glass`}>
+          <h2>
+            Analytics <span>📈</span>
+          </h2>
+          <p>Track impressions, followers, and engagement metrics in real-time.</p>
         </div>
-      </main>
-    </div>
+
+        <div className={`${styles.card} glass`}>
+          <h2>
+            Research <span>🔍</span>
+          </h2>
+          <p>Discover trending topics and accounts with advanced keyword search.</p>
+        </div>
+
+        <div className={`${styles.card} glass`}>
+          <h2>
+            Settings <span>⚙️</span>
+          </h2>
+          <p>Configure API keys and customize your dashboard preferences.</p>
+        </div>
+      </div>
+    </main>
   );
 }

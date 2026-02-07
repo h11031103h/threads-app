@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  accounts  Account[]
+}
+
+model Account {
+  id                 String   @id @default(uuid())
+  userId             String
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  provider           String   // "threads"
+  providerAccountId  String   // Threads User ID
+  accessToken        String
+  expiresAt          Int?
+  scheduledPosts     ScheduledPost[]
+  analytics          Analytics[]
+  
+  @@unique([provider, providerAccountId])
+}
+
+model ScheduledPost {
+  id           String   @id @default(uuid())
+  accountId    String
+  account      Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  content      String   // JSON string of the thread tree structure
+  scheduledFor DateTime
+  status       String   // "scheduled", "published", "failed", "draft"
+  publishedIds String?  // JSON string of published thread IDs
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Analytics {
+  id          String   @id @default(uuid())
+  accountId   String
+  account     Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  date        DateTime @default(now()) // Records specific date stats
+  followers   Int
+  likes       Int      @default(0)
+  replies     Int      @default(0)
+  
+  @@index([accountId, date])
+}
